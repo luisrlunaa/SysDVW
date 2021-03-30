@@ -1,0 +1,272 @@
+﻿@page
+@model SysDVW.Pages.Home.IndexModel
+@{
+    Layout = "_Layout";
+}
+
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper mt-2">
+    <!-- /.content-header -->
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <!-- Info boxes -->
+            <div class="row">
+                <div class="col-12 col-sm-6 col-md-3">
+                    <div class="info-box">
+                        <span class="info-box-icon bg-info elevation-1"><i class="fas fa-cog"></i></span>
+
+                        <div class="info-box-content">
+                            <span class="info-box-text">CPU Traffic</span>
+                            <span class="info-box-number">
+                                10
+                                <small>%</small>
+                            </span>
+                        </div>
+                        <!-- /.info-box-content -->
+                    </div>
+                    <!-- /.info-box -->
+                </div>
+                <!-- /.col -->
+                <div class="col-12 col-sm-6 col-md-3">
+                    <div class="info-box mb-3">
+                        <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-thumbs-up"></i></span>
+
+                        <div class="info-box-content">
+                            <span class="info-box-text">Likes</span>
+                            <span class="info-box-number">41,410</span>
+                        </div>
+                        <!-- /.info-box-content -->
+                    </div>
+                    <!-- /.info-box -->
+                </div>
+                <!-- /.col -->
+                <!-- fix for small devices only -->
+                <div class="clearfix hidden-md-up"></div>
+
+                <div class="col-12 col-sm-6 col-md-3">
+                    <div class="info-box mb-3">
+                        <span class="info-box-icon bg-success elevation-1"><i class="fas fa-shopping-cart"></i></span>
+
+                        <div class="info-box-content">
+                            <span class="info-box-text">Ventas</span>
+                            <span class="info-box-number">@Model.homeViewModel.salescount</span>
+                        </div>
+                        <!-- /.info-box-content -->
+                    </div>
+                    <!-- /.info-box -->
+                </div>
+                <!-- /.col -->
+                <div class="col-12 col-sm-6 col-md-3">
+                    <div class="info-box mb-3">
+                        <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-boxes"></i></span>
+
+                        <div class="info-box-content">
+                            <span class="info-box-text">Productos</span>
+                            <span class="info-box-number">@Model.homeViewModel.ProductCount</span>
+                        </div>
+                        <!-- /.info-box-content -->
+                    </div>
+                    <!-- /.info-box -->
+                </div>
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title">TOTALES</h5>
+
+                            <div class="card-tools">
+                                <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-tool dropdown-toggle" data-toggle="dropdown">
+                                        <i class="fas fa-wrench"></i>
+                                    </button>
+                                    <div class="dropdown-menu dropdown-menu-right" role="menu">
+                                        <a href="#" class="dropdown-item">Action</a>
+                                        <a href="#" class="dropdown-item">Another action</a>
+                                        <a href="#" class="dropdown-item">Something else here</a>
+                                        <a class="dropdown-divider"></a>
+                                        <a href="#" class="dropdown-item">Separated link</a>
+                                    </div>
+                                </div>
+                                <button type="button" class="btn btn-tool" data-card-widget="remove">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                        </div>
+         
+                        <!-- ./card-body -->
+                        <div class="card-footer">
+                            <div class="row">
+                                <div class="col-sm-3 col-6">
+                                    <div class="description-block border-right">
+                                        @*<span class="description-percentage text-primary"><i class="fas fa-caret-up"></i> 17%</span>*@
+                                        <h5 class="description-header">$35,210.43</h5>
+                                        <span class="description-text">TOTAL REVENUE</span>
+                                    </div>
+                                    <!-- /.description-block -->
+                                </div>
+                                <!-- /.col -->
+                                <div class="col-sm-3 col-6">
+                                    <div class="description-block border-right">
+                                        @*<span class="description-percentage text-danger"><i class="fas fa-caret-left"></i> 0%</span>*@
+                                        <h5 class="description-header">$10,390.90</h5>
+                                        <span class="description-text">TOTAL COST</span>
+                                    </div>
+                                    <!-- /.description-block -->
+                                </div>
+                                <!-- /.col -->
+                                <div class="col-sm-3 col-6">
+                                    <div class="description-block border-right">
+                                        @*<span class="description-percentage text-success"><i class="fas fa-caret-up"></i> 20%</span>*@
+                                        <h5 class="description-header text-success">@Model.homeViewModel.salesgain.ToString("C2")</h5>
+                                        <span class="description-text">TOTAL DE GANANCIAS DEL MES</span>
+                                    </div>
+                                    <!-- /.description-block -->
+                                </div>
+                                <!-- /.col -->
+                                <div class="col-sm-3 col-6">
+                                    <div class="description-block">
+                                        @*<span class="description-percentage text-warning"><i class="fas fa-caret-down"></i> 18%</span>*@
+                                        <h5 class="description-header text-warning">@Model.homeViewModel.Productgain.ToString("C2")</h5>
+                                        <span class="description-text">TOTAL DE GANANCIAS</span>
+                                    </div>
+                                    <!-- /.description-block -->
+                                </div>
+                            </div>
+                            <!-- /.row -->
+                        </div>
+                        <!-- /.card-footer -->
+                    </div>
+                    <!-- /.card -->
+                </div>
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
+            <!-- Main row -->
+            <div class="row">
+                <!-- Left col -->
+                <div class="col-md-8">
+                    <!-- TABLE: LATEST ORDERS -->
+                    <div class="card">
+                        <div class="card-header border-transparent">
+                            <h3 class="card-title">Ultimas Ventas Realizadas</h3>
+
+                            <div class="card-tools">
+                                <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                                <button type="button" class="btn btn-tool" data-card-widget="remove">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body p-0">
+                            <div class="table-responsive">
+                                <table class="table m-0">
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Cliente</th>
+                                            <th>Tipo Factura</th>
+                                            <th>Total</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @if (Model.homeViewModel.Saletlist.Count() > 0)
+                                        {
+                                            @foreach (var item1 in Model.homeViewModel.Saletlist)
+                                            {
+                                                <tr>
+                                                    <td>@item1.IdVenta</td>
+                                                    <td>@item1.NombreCliente</td>
+                                                    @if (item1.TipoFactura.ToLower() == "debito")
+                                                    {
+                                                        <td><span class="badge badge-success">@item1.TipoFactura</span></td>
+                                                    }
+                                                    else
+                                                    {
+                                                        <td><span class="badge badge-warning">@item1.TipoFactura</span></td>
+                                                    }
+
+                                                    <td>
+                                                        <div class="sparkbar" data-color="#00a65a" data-height="20">@item1.Total</div>
+                                                    </td>
+                                                </tr>
+                                            }
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- /.table-responsive -->
+                        </div>
+                        <!-- /.card-body -->
+                        <div class="card-footer clearfix">
+                            <a asp-page="/Sales/index" class="btn btn-sm btn-info float-left">Crear Nueva Venta</a>
+                            <a asp-page="/Sales/sales-list" class="btn btn-sm btn-secondary float-right">Ver Todas Las Ventas</a>
+                        </div>
+                        <!-- /.card-footer -->
+                    </div>
+                    <!-- /.card -->
+                </div>
+                <!-- /.col -->
+
+                <div class="col-md-4">
+                    <!-- PRODUCT LIST -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Productos Agregados Recientemente</h3>
+                            <div class="card-tools">
+                                <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                                <button type="button" class="btn btn-tool" data-card-widget="remove">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body p-0">
+                            <ul class="products-list product-list-in-card pl-2 pr-2">
+                                @if (Model.homeViewModel.productlist.Count() > 0)
+                                {
+                                    @foreach (var item in Model.homeViewModel.productlist)
+                                    {
+                                        <li class="item">
+                                            <div class="product-info">
+                                                <a href="javascript:void(0)" class="product-title">
+                                                    @item.Nombre
+                                                    <span class="badge badge-warning float-right">@item.Stock</span>
+                                                </a>
+                                                <span class="product-description">
+                                                    Marca: @item.Marca, Precio: @item.PrecioVenta.ToString("C2"), Estado: @item.TipoGoma
+                                                </span>
+                                            </div>
+                                        </li>
+                                    }
+                                }
+
+                            </ul>
+                        </div>
+                        <!-- /.card-body -->
+                        <div class="card-footer text-center">
+                            <a asp-page="/Products/product-list" class="uppercase">Ver Todos los Productos</a>
+                        </div>
+                        <!-- /.card-footer -->
+                    </div>
+                    <!-- /.card -->
+                </div>
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
+        </div><!--/. container-fluid -->
+    </section>
+    <!-- /.content -->
+</div>

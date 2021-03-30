@@ -1,0 +1,133 @@
+﻿@page
+@model SysDVW.Pages.Sales.SalesDetailsModel
+@{
+}
+
+<div class="content-wrapper p-4">
+    @*beggin header*@
+    <div class="row mb-0">
+        <div class="offset-4 col-4">
+            <h2 class="mt-0 text-center">Detalles de Ventas</h2>
+        </div>
+        <div class="col-4 form-group text-right mt-3">
+            <a asp-page="/Sales/sales-list" class="puntero btn btn-primary btn-sm"> <i class="fas fa-backward"></i> Atras</a>
+            <a onclick="returnsale(@Model.SalesView.Sales.IdVenta)" id="${Id}" alt="Devolucion" class="puntero btn btn-warning btn-sm"> <i class="fas fa-reply"></i> Devolver Venta</a>
+            <a onclick="alerta(@Model.SalesView.Sales.IdVenta)" id="${Id}" alt="Eliminar" class="btn btn-danger puntero btn-sm"> <i class="fas fa-trash-alt"></i> Eliminar</a>
+        </div>
+    </div>
+    @*end header*@
+    <div class="col-12 row">
+        <span class="text-danger text-center">@Html.ValidationMessage("CustomError")</span>
+
+        <!--Tipo factura area-->
+        <fieldset class=" col-4 border border-dark">
+            <legend style="font-size:13px; font-weight:bold;">Detalles de Factura</legend>
+            <div class="row">
+                <div class="col-12 form-group">
+                    <label>Tipo de Factura : </label>
+                    @Model.SalesView.Sales.TipoFactura
+                </div>
+                <div class="col-12 form-group">
+                    <label> Fecha de Venta : </label>
+                    @Model.SalesView.Sales.FechaVenta.ToShortDateString()
+                </div>
+            </div>
+        </fieldset>
+
+        <!--NCF area-->
+        <fieldset class=" col-4 border border-dark">
+            <legend style="font-size:13px; font-weight:bold;">NCF</legend>
+            <div class="row">
+                <div class="col-12 form-group">
+                    <label for="tipoNCF">Tipo de NCF :</label>
+                    @Model.SalesView.Sales.TipoDocumento
+                </div>
+                <div class="col-12 form-group">
+                    <label for="secuenciaNCF">Numero de NCF :</label>
+                    @Model.SalesView.Sales.NroDocumento
+                </div>
+            </div>
+        </fieldset>
+
+        <!--Client area-->
+        <fieldset class="col-4 border  border-dark">
+            <legend style="font-size:13px; font-weight:bold;">Clientes</legend>
+            <div class="row">
+                <div class="col-12 form-group">
+                    <label for="doccli">Doc. Identidad :</label>
+                    @Model.SalesView.DocClient
+                </div>
+                <div class="col-12 form-group">
+                    <label for="nomcli">Nombre :</label>
+                    @Model.SalesView.Sales.NombreCliente
+                </div>
+            </div>
+        </fieldset>
+
+        <!--Products area-->
+        <div class="col-12 mt-2" style="font-size:12px;">
+            <table id="example1" class="table table-bordered table-striped">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Descripcion</th>
+                        <th scope="col">Cantidad</th>
+                        <th scope="col">Precio</th>
+                        <th scope="col">ITBIS</th>
+                        <th scope="col">Importe</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item2 in Model.SalesView.DetailSalesList)
+                    {
+                        <tr>
+                            <th scope="row">@item2.IdVenta</th>
+                            <td>@item2.detalles_P</td>
+                            <td>@item2.Cantidad</td>
+                            <td>@item2.PrecioUnitario</td>
+                            <td>@item2.Igv</td>
+                            <td>@item2.SubTotal</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <br />
+            <div class="text-right mr-3">
+                <label>Sub-Total = <span class="text-bold text-primary">@Model.SalesView.subtotal</span></label> &nbsp; &nbsp;
+                <label>ITBIS = <span class="text-bold text-warning">@Model.SalesView.ITBIS</span></label> &nbsp; &nbsp;
+                <label>Total = <span class="text-bold text-success">@Model.SalesView.total</span></label>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    <script>
+        function returnsale(id) {
+            var opcion = confirm("Esta seguro Desea hacer una Devolucion de esta Venta?");
+            if (opcion == true) {
+                window.location.href = "sales-list?ID=" + id + "&handler=ReturnSale";
+            } else { }
+        }
+
+        function alerta(id) {
+            var opcion = confirm("Esta seguro Desea Eliminar?");
+            if (opcion == true) {
+                window.location.href = "sales-list?ID=" + id + "&handler=DeleteSales";
+            } else { }
+        }
+
+        $(function () {
+            $("#example1").DataTable({
+                "responsive": true, "lengthChange": false, "autoWidth": false
+            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+            $('#example2').DataTable({
+                "paging": true,
+                "lengthChange": false,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false,
+                "responsive": true,
+            });
+        });
+    </script>
+}

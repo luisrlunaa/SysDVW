@@ -1,0 +1,98 @@
+﻿@page
+@model SysDVW.Pages.Security.registerModel
+
+@{
+    Layout = "_LayoutFullScreen";
+}
+<div class="register-box">
+    <div class="login-logo">
+        <b>Sistema de Venta e Inventario</b>
+    </div>
+
+    <div class="card">
+        <div class="card-body register-card-body">
+            <span class="text-danger text-center">@Html.ValidationMessage("CustomError")</span>
+            <p class="login-box-msg">Register a new membership</p>
+            <form asp-page-handler="Register" method="post">
+                @*<div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Nombre Completo">
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <span class="fas fa-user"></span>
+                        </div>
+                    </div>
+                </div>*@
+                @*<div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Telefono">
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <span class="fas fa-user"></span>
+                        </div>
+                    </div>
+                </div>*@
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" asp-for="user.Empleados.Dni" placeholder="Cedula">
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <span class="fas fa-user"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="input-group mb-3">
+                    <input type="email" class="form-control" asp-for="user.Empleados.Correo" placeholder="Correo">
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <span class="fas fa-envelope"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="input-group mb-3">
+                    <input type="password" class="form-control"asp-for="user.Usuario.Contraseña"  placeholder="Clave">
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <span class="fas fa-lock"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="input-group mb-3">
+                    <input type="password" class="form-control"asp-for="user.Usuario.ConfirmPassword" placeholder="Repita Clave">
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <span class="fas fa-lock"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    @*<div class="col-8">
+                        <div class="icheck-primary">
+                            <input type="checkbox" id="agreeTerms" name="terms" value="agree">
+                            <label for="agreeTerms">
+                                Acepto los <a href="#">Terminos</a>
+                            </label>
+                        </div>
+                    </div>*@
+                    <!-- /.col -->
+                    <div class="col-4">
+                        <button type="submit" class="btn btn-primary btn-block">Registrar</button>
+                    </div>
+                    <!-- /.col -->
+                </div>
+            </form>
+
+            @*<div class="social-auth-links text-center">
+            <p>- OR -</p>
+            <a href="#" class="btn btn-block btn-primary">
+                <i class="fab fa-facebook mr-2"></i>
+                Sign up using Facebook
+            </a>
+            <a href="#" class="btn btn-block btn-danger">
+                <i class="fab fa-google-plus mr-2"></i>
+                Sign up using Google+
+            </a>
+        </div>*@
+
+            <a asp-page="/Security/login" class="text-center">Ya tengo un Usuario</a>
+        </div>
+        <!-- /.form-box -->
+    </div><!-- /.card -->
+</div>

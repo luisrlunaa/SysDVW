@@ -1,0 +1,101 @@
+﻿@page
+@model SysDVW.Pages.Products.NewproductModel
+@{
+}
+<div class="content-wrapper">
+    <div class="col-12 row mt-0 p-4">
+        <div class="col-12">
+            <span class="text-danger text-center">@Html.ValidationMessage("CustomError")</span>
+            <div class="row mb-0">
+                <div class="offset-4 col-4">
+                    <h2 class="mt-0 text-center">Nuevo Producto</h2>
+                </div>
+                <div class="col-4 form-group text-right mt-3">
+                    <a asp-page="/Products/product-list" class="puntero btn btn-primary btn-sm"> <i class="fas fa-backward"></i> Atras</a>
+                </div>
+            </div>
+
+            <div class="row">
+                <!--Products area-->
+                <form method="post" asp-page-handler="NewProduct" id="producto">
+                    <div class="row" style="font-size:10px;">
+                        <div class="col-4 row mr-1">
+                            <div class="col-12">
+                                <label for="Selectcategorytype">Categoria</label>
+                            </div>
+                            <div class="col-6 form-group">
+                                <select class="form-control form-control-sm" id="Selectcategorytype" onchange="NewCategoryType()" data-live-search="true">
+                                    <option value="">Seleccione una Categoria</option>
+                                    @foreach (var item in Model.ProductView.categoryList)
+                                    {
+                                        <option value="@item.IdCategoria">@item.Descripcion</option>
+                                    }
+                                </select>
+                            </div>
+                            <input type="hidden" id="idcategoria" asp-for="@Model.Product.IdCategoria">
+                            <div class="col-6 form-group">
+                                <input type="text" readonly class="form-control form-control-sm" value="@Model.Product.Categoria" placeholder="Categoria">
+                            </div>
+                        </div>
+                        <div class="col-4 row  mr-1">
+                            <div class="col-12">
+                                <label for="Selectcategorytype">Tipo de Producto</label>
+                            </div>
+                            <div class="col-6 form-group">
+                                <select class="form-control form-control-sm" id="Selecttype" onchange="NewSelectType()" data-live-search="true">
+                                    <option value="">Seleccione un Tipo de producto</option>
+                                    @foreach (var item in Model.ProductView.typeyantaList)
+                                    {
+                                        <option value="@item.descripcion">@item.descripcion</option>
+                                    }
+                                </select>
+                            </div>
+                            <div class="col-6 form-group">
+                                <input type="text" readonly class="form-control form-control-sm" value="@Model.Product.TipoGoma" placeholder="Tipo Producto">
+                            </div>
+                        </div>
+                        <div class="col-4 form-group">
+                            <label for="descripcion">Descripcion</label>
+                            <input type="text" id="descripcion" asp-for="@Model.Product.Nombre" value="@Model.Product.Nombre" class="form-control form-control-sm" placeholder="Descripcion">
+                        </div>
+                        <div class="col-4 form-group">
+                            <label for="marca">Marca</label>
+                            <input type="text" id="marca" asp-for="@Model.Product.Marca" value="@Model.Product.Marca" class="form-control form-control-sm" placeholder="Marca">
+                        </div>
+                        <div class="col-4 form-group">
+                            <label for="stock">Cantidad</label>
+                            <input type="number" id="stock" asp-for="@Model.Product.Stock" value="@Model.Product.Stock" class="form-control form-control-sm" placeholder="Cantidad">
+                        </div>
+                        <div class="col-4 form-group">
+                            <label for="precioventa">Precio de Compra</label>
+                            <input type="number" id="precioventa" asp-for="@Model.Product.PrecioCompra" value="@Model.Product.PrecioCompra" class="form-control form-control-sm" placeholder="Precio de Compra">
+                        </div>
+                        <div class="col-4 form-group">
+                            <label for="precioventa">Precio de Venta</label>
+                            <input type="number" id="precioventa" asp-for="@Model.Product.PrecioVenta" value="@Model.Product.PrecioVenta" class="form-control form-control-sm" placeholder="Precio de Venta">
+                        </div>
+                        <div class="col-4 form-group">
+                            <label for="precioventa">Precio Minimo</label>
+                            <input type="number" id="precioventa" asp-for="@Model.Product.Pmin" value="@Model.Product.Pmin" class="form-control form-control-sm" placeholder="Precio Minimo">
+                        </div>
+                        <div class="col-4 form-group">
+                            <label for="precioventa">Precio Maximo</label>
+                            <input type="number" id="precioventa" asp-for="@Model.Product.Pmax" value="@Model.Product.Pmax" class="form-control form-control-sm" placeholder="Precio Maximo">
+                        </div>
+                        <div class="col-4 form-group">
+                            <label for="itbis">ITBIS</label>
+                            <input type="number" id="itbis" asp-for="@Model.Product.itbis" value="@Model.Product.itbis" class="form-control form-control-sm" placeholder="ITBIS">
+                        </div>
+
+                        <div class="offset-4 col-4 text-right">
+                            <button type="submit" class="btn btn-success btn-sm text-right">
+                                <i class="fas fa-plus"></i> Agregar
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/Theme/js/ProductScript.js"></script>

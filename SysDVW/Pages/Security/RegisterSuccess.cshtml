@@ -1,0 +1,40 @@
+﻿@page
+@model SysDVW.Pages.Security.RegisterSuccessModel
+
+@{
+    Layout = "_LayoutFullScreen";
+}
+
+<style>
+    #check {
+        margin: auto;
+        width: 20%;
+        font-size: 5em;
+        text-align: center;
+        color: forestgreen;
+    }
+</style>
+
+<div class="login-box">
+    <div class="login-logo">
+        <b>Sistema de Venta e Inventario</b>
+    </div>
+    <!-- /.login-logo -->
+    <div class="card">
+        <div class="card-body login-card-body">
+            <div class="card p-4 text-center">
+                <div id="check" class="text-center">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <br />
+                <h4>Registro Completado Correctamente</h4>
+                <br />
+            </div>
+
+            <p class="mt-3 mb-1">
+                <a asp-page="/Security/login" class="btn btn-success">Ir al Inicio de sesion</a>
+            </p>
+        </div>
+        <!-- /.login-card-body -->
+    </div>
+</div>

@@ -1,0 +1,25 @@
+﻿            //Get-Set Variables de session
+            //_httpContextAccessor.HttpContext.Session.Get<string>(ConstactSession.ProgramingPayment);
+            //_httpContextAccessor.HttpContext.Session.Set<string>(ConstactSession.ProgramingPayment, "hidden");
+            //HttpContext.Session.Remove("ProgramingPayment");
+
+            //Enviar Mensaje al FrontEnd
+            //ModelState.AddModelError("CustomError", "Mensaje");
+            //<span class="text-danger">@Html.ValidationMessage("CustomError")</span>
+
+            //Enviar Mensaje Por Correo
+            //var message = new Message(new string[] { "Luiquicash@gmail.com" }, $"Te Conectaste al Sistema de Ventas de LunasSystem { userloging.Usuario }", null, null);
+            //await _emailSender.SendEmailAsync(message);
+            //Gmail SMTP port (TLS): 587
+            //Gmail SMTP port (SSL): 465
+
+            //Boton eliminar con alerta
+            //<a onclick="alerta(id)" id="${Id}" alt="${Id}" class="text-danger"> <i class="fas fa-trash-alt fa-fw mr-2"></i> Eliminar</a>
+               function alerta(id) {
+                   var opcion = confirm("Esta seguro Desea Eliminar?");
+                   if (opcion == true) 
+                   {
+                    window.location.href = "/Index/DeleteList?ID=" + id;
+                    } 
+                    else {}
+                }

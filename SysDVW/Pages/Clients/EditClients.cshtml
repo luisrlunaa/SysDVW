@@ -1,0 +1,72 @@
+﻿@page
+@model SysDVW.Pages.Clients.EditClientsModel
+@{
+}
+<div class="content-wrapper">
+    <div class="col-12 row mt-0 p-4">
+        <div class="col-12">
+            <span class="text-danger text-center">@Html.ValidationMessage("CustomError")</span>
+            <div class="row mb-0">
+                <div class="offset-4 col-4">
+                    <h2 class="mt-0 text-center">Editar Cliente</h2>
+                </div>
+                <div class="col-4 form-group text-right mt-3">
+                    <a asp-page="/Clients/clients-list" class="puntero btn btn-primary btn-sm"> <i class="fas fa-backward"></i> Atras</a>
+                </div>
+            </div>
+
+            <div class="row">
+                <!--Clients area-->
+                <form method="post" asp-page-handler="EditClient" id="cliente">
+                    <div class="row" style="font-size:10px;">
+                        <input type="hidden" asp-for="@Model.Client.IdCliente">
+                        <div class="col-4 form-group">
+                            <label for="Nombres">Nombres</label>
+                            <input type="text" id="Nombres" asp-for="@Model.Client.Nombres" value="@Model.Client.Nombres" class="form-control form-control-sm" placeholder="Nombres">
+                        </div>
+                        <div class="col-4 form-group">
+                            <label for="Apellidos">Apellidos</label>
+                            <input type="text" id="Apellidos" asp-for="@Model.Client.Apellidos" value="@Model.Client.Apellidos" class="form-control form-control-sm" placeholder="Apellidos">
+                        </div>
+                        <div class="col-4 form-group">
+                            <label for="Cedula">Cedula</label>
+                            <input type="number" id="Cedula" asp-for="@Model.Client.DNI" value="@Model.Client.DNI" class="form-control form-control-sm" placeholder="Cedula">
+                        </div>
+                        <div class="col-4 form-group">
+                            <label for="Direccion">Direccion</label>
+                            <input type="text" id="Direccion" asp-for="@Model.Client.Direccion" value="@Model.Client.Direccion" class="form-control form-control-sm" placeholder="Direccion">
+                        </div>
+
+                        <!---Client User area--->
+                        @*<fieldset class="border border-dark col-4" style="font-size:10px;">
+                            <legend style="font-size:13px; font-weight:bold;">Usuario del Cliente</legend>
+                            <div class="col-4 form-group">
+                                <label for="Telefono">Telefono</label>
+                                <input type="text" id="Telefono" asp-for="@Model.Client.Telefono" value="@Model.Client.Telefono" class="form-control form-control-sm" placeholder="Telefono">
+                            </div>
+                            <div class="col-4 form-group">
+                                <label for="precioventa">Precio Minimo</label>
+                                <input type="text" id="precioventa" asp-for="@Model.Product.Pmin" value="@Model.Product.Pmin" class="form-control form-control-sm" placeholder="Precio Minimo">
+                            </div>
+                            <div class="col-4 form-group">
+                                <label for="precioventa">Precio Maximo</label>
+                                <input type="text" id="precioventa" asp-for="@Model.Product.Pmax" value="@Model.Product.Pmax" class="form-control form-control-sm" placeholder="Precio Maximo">
+                            </div>
+                         </fieldset>*@
+                        
+
+                        <div class="form-group text-right mt-4">
+                            <button type="submit" class="btn btn-primary btn-sm min-width-200">
+                                <i class="fas fa-edit"></i> Modificar
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+
+}

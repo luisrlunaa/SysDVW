@@ -1,0 +1,35 @@
+﻿@page
+@model SysDVW.Pages.Security.ValidationCodeModel
+@{
+    Layout = "_LayoutFullScreen";
+}
+<div class="main-content">
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="box-block">
+                <div class="box-content">
+                    <div class="col-12">
+                        <span class="text-danger">@Html.ValidationMessage("CustomError")</span>
+                        <form method="post" asp-page-handler="Validar">
+                            <p class="font-weight-bold">Favor Introduzca el Codigo de Validacion Recibido</p>
+                            <div class="form-group row">
+                                <div class="col-6">
+                                    <label>Codigo</label>
+                                    <input type="number" id="lname" min="0" class="form-control" value="0" placeholder="Introduzca Codigo" asp-for="@Model.validar.codigo">
+                                    <span asp-validation-for="@Model.validar.codigo" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="row col-12 mt-4 ">
+                                <button type="submit" class="btn btn-success min-width-200"><i class="fal fa-check-circle"></i> Validar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+</script>

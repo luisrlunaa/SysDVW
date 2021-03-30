@@ -1,0 +1,111 @@
+﻿@page
+@model SysDVW.Pages.Sales.sales_listModel
+@{
+}
+
+<div class="content-wrapper">
+    <div class="col-12 bg-gradient-white" style="font-size:11px;">
+        <span class="text-danger text-center">@Html.ValidationMessage("CustomError")</span>
+        <div class="card-header row">
+            <div class="col-8">
+                <h3 class="card-title">Listado de Ventas</h3>
+            </div>
+            <div class="col-4 text-right">
+                <a asp-page="/Sales/NewSales" class="puntero btn btn-primary btn-sm text-right"> <i class="fas fa-plus-circle"></i> Nueva Venta</a>
+            </div>
+        </div>
+        <div class="card-body">
+            <table id="example1" class="table table-bordered table-striped">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>ID</th>
+                        <th>NroDocument</th>
+                        <th>Tipo Documento</th>
+                        <th>Tipo Factura</th>
+                        <th>Nombre Cliente</th>
+                        <th>Fecha Venta</th>
+                        <th>Total</th>
+                        <th>Restante</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.SalesListView.SalesList != null && Model.SalesListView.SalesList.Count() > 0)
+                    {
+                        foreach (var item2 in Model.SalesListView.SalesList)
+                        {
+                            <tr>
+                                <th scope="row">@item2.IdVenta</th>
+                                <td>@item2.NroDocumento</td>
+                                <td>@item2.TipoDocumento</td>
+                                @if (item2.TipoFactura.ToLower() == "debito")
+                                {
+                                    <td class="bg-success">@item2.TipoFactura</td>
+                                }
+                                else
+                                {
+                                    <td class="bg-warning">@item2.TipoFactura</td>
+                                }
+                                <td>@item2.NombreCliente</td>
+                                <td>@item2.FechaVenta.ToShortDateString()</td>
+                                <td>@item2.Total.ToString("C2")</td>
+                                <td>@item2.Restante.ToString("C2")</td>
+                                <td>
+                                    <a onclick="details(@item2.IdVenta)" id="${Id}" alt="Ver detalles" class="text-primary puntero"><i class="fas fa-file-alt"></i></a> /
+                                    <a onclick="alerta(@item2.IdVenta)" id="${Id}" alt="Eliminar" class="text-danger puntero"> <i class="fas fa-trash-alt"></i></a>/
+                                    <a onclick="returnsale(@item2.IdVenta)" id="${Id}" alt="Devolucion" class="text-warning puntero"> <i class="fas fa-reply"></i></a>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        <div class="text-right mr-3">
+            <label>Total Vendido = <span class="text-bold text-primary">@Model.SalesListView.allmoneysales</span></label> &nbsp; &nbsp;
+            <label>Total Vendido Hoy = <span class="text-bold text-success">@Model.SalesListView.allmoneysalestoday</span></label>
+        </div>
+
+    </div>
+</div>
+
+@section Scripts {
+    <script>   
+        function alerta(id) {
+            var opcion = confirm("Esta seguro Desea Eliminar?");
+            if (opcion == true) {
+                window.location.href = "sales-list?ID=" + id + "&handler=DeleteSales";
+            } else { }
+        }
+
+        function returnsale(id) {
+            var opcion = confirm("Esta seguro Desea hacer una Devolucion de esta Venta?");
+            if (opcion == true) {
+                window.location.href = "sales-list?ID=" + id + "&handler=ReturnSale";
+            } else { }
+        }
+
+        function details(id) {
+                window.location.href = "sales-list?ID=" + id + "&handler=DetailSales";
+        }
+    </script>
+
+    <script>
+        $(function () {
+            $("#example1").DataTable({
+                "responsive": true, "lengthChange": false, "autoWidth": false,
+                "buttons": ["excel", "pdf", "print"]
+            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+            $('#example2').DataTable({
+                "paging": true,
+                "lengthChange": false,
+                "searching": false,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false,
+                "responsive": true,
+            });
+        });
+    </script>
+}
