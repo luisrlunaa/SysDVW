@@ -35,10 +35,7 @@ namespace SysDVW.Pages.Clients
             if (listClientes == null)
             {
                 listClientes = _context.Clientes.Where(p => p.IdCliente > 0).ToList();
-
-
                 listClients = listClientes;
-              
 
                 _httpContextAccessor.HttpContext.Session.Get<List<Cliente>>(ConstactSession.ClientList);
                 _httpContextAccessor.HttpContext.Session.Set<List<Cliente>>(ConstactSession.ClientList, listClients);
@@ -47,9 +44,10 @@ namespace SysDVW.Pages.Clients
             {
                 listClients = listClientes;
             }
+
             return Page();
         }
-        public IActionResult OnGetDeleteproduct(int ID)
+        public IActionResult OnGetDeleteclients(int ID)
         {
             listClients = _httpContextAccessor.HttpContext.Session.Get<List<Cliente>>(ConstactSession.ClientList);
             if (listClients == null)
@@ -73,7 +71,7 @@ namespace SysDVW.Pages.Clients
             }
             else
             {
-                ModelState.AddModelError("CustomError", "Debe seleccionar al menos un producto antes de eliminarlo");
+                ModelState.AddModelError("CustomError", "Debe seleccionar al menos un Cliente antes de eliminarlo");
                 return OnGet();
             }
         }

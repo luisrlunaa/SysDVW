@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SysDVW.Models.Entities
 {
@@ -8,6 +9,10 @@ namespace SysDVW.Models.Entities
         public int IdCliente { get; set; }
         [Required]
         public string DNI { get; set; }
+        [NotMapped]
+        public int IdCargo { get; set; }
+        [NotMapped]
+        public string Correo { get; set; }
         public string Apellidos { get; set; }
         [Required]
         public string Nombres { get; set; }

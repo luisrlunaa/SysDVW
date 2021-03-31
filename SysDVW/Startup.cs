@@ -33,7 +33,7 @@ namespace SysDVW
 
             var builder = services.AddMvc().AddRazorPagesOptions(options =>
             {
-                //options.Conventions.AddPageRoute("/Security/Login", "");
+                options.Conventions.AddPageRoute("/Security/Login", "");
                 //options.Conventions.AddPageRoute("/Security/Login", "");
                 //options.Conventions.AuthorizeFolder("/Home");
                 //options.Conventions.AuthorizeFolder("/Payment");
@@ -83,14 +83,14 @@ namespace SysDVW
 
             app.UseEndpoints(endpoints =>
             {
-                //endpoints.MapControllers();
+                endpoints.MapControllers();
                 endpoints.MapRazorPages();
-                //endpoints.MapGet("/{0}/", async context =>
-                //{
-                //    var path = $"/Home/Index?ReturnUrl={context.Request.Path}";
-                //    context.Response.Redirect(path);
-                //    return;
-                //});
+                endpoints.MapGet("/{0}/", async context =>
+                {
+                    var path = $"/Home/Index?ReturnUrl={context.Request.Path}";
+                    context.Response.Redirect(path);
+                    return;
+                });
             });
         }
     }

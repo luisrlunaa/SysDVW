@@ -88,7 +88,7 @@
                 </li>
                 <li class="nav-item">
                     <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-person-booth"></i>
+                        <i class="nav-icon fas fa-people-arrows"></i>
                         <p>
                             Clientes
                             <i class="right fas fa-angle-left"></i>
@@ -105,6 +105,29 @@
                             <a asp-page="/Clients/clients-list" class="nav-link">
                                 <i class="fas fa-list-alt nav-icon"></i>
                                 <p>Lista de Clientes</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-person-booth"></i>
+                        <p>
+                            Empleados
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a asp-page="/Employees/NewEmployees" class="nav-link">
+                                <i class="fas fa-user-plus nav-icon"></i>
+                                <p>Nuevo Empleado</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a asp-page="/Employees/Employees-list" class="nav-link">
+                                <i class="fas fa-list-alt nav-icon"></i>
+                                <p>Lista de Empleados</p>
                             </a>
                         </li>
                     </ul>

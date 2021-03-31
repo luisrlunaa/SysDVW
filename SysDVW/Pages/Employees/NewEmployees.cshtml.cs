@@ -9,48 +9,78 @@ using SysDVW.Models.Entities;
 using SysDVW.Utilities;
 using SysDVW.ViewModels;
 
-namespace SysDVW.Pages.Clients
+namespace SysDVW.Pages.Employees
 {
-    public class NewClientsModel : PageModel
+    public class NewEmployeesModel : PageModel
     {
+        public List<Cargo> listposition { get; set; }
         public User NewUser { get; set; }
         private readonly InvSysContext _context;
         private readonly IHttpContextAccessor _httpContextAccessor;
-        public NewClientsModel(InvSysContext context, IHttpContextAccessor httpContextAccessor)
+        public NewEmployeesModel(InvSysContext context, IHttpContextAccessor httpContextAccessor)
         {
+            listposition = new List<Cargo>();
             NewUser = new User();
             _context = context;
             _httpContextAccessor = httpContextAccessor;
         }
         public IActionResult OnGet()
         {
+            var positionlist = _httpContextAccessor.HttpContext.Session.Get<List<Cargo>>(ConstactSession.PositionList);
+            if (positionlist is null)
+            {
+                listposition = _context.Cargos.Where(x => x.Descripcion.ToLower() != "cliente").ToList();
+                _httpContextAccessor.HttpContext.Session.Set<List<Cargo>>(ConstactSession.PositionList, positionlist);
+            }
+            else
+            {
+                listposition = positionlist;
+            }
+
+            var empleado = _httpContextAccessor.HttpContext.Session.Get<User>(ConstactSession.User);
+            if(empleado !=null)
+            {
+                NewUser.Empleados = empleado.Empleados;
+            }
+
             return Page();
         }
 
-        //Creacion del Cliente
-        public IActionResult OnPostNewClient(User NewUser)
+        //seleccionar tipo de empleado
+        public IActionResult OnGetSelecttype(int id)
         {
-            if (NewUser.Clientes.Nombres !=null && NewUser.Clientes.Apellidos != null)
+            var cargo = _context.Cargos.FirstOrDefault(x => x.IdCargo == id);
+            NewUser.Empleados.IdCargo = cargo.IdCargo;
+            NewUser.Empleados.Cargo = cargo.Descripcion;
+            _httpContextAccessor.HttpContext.Session.Set<User>(ConstactSession.User, NewUser);
+            return OnGet();
+        }
+
+        //Creacion del Cliente
+        public IActionResult OnPostNewEmployees(User NewUser)
+        {
+            if (NewUser.Empleados.Nombres !=null && NewUser.Empleados.Apellidos != null)
             {
-                var Clientlist = _httpContextAccessor.HttpContext.Session.Get<List<Cliente>>(ConstactSession.ClientList);
-                if (Clientlist != null)
+                var EmployeesList = _httpContextAccessor.HttpContext.Session.Get<List<Empleado>>(ConstactSession.EmployeesList);
+                if (EmployeesList != null)
                 {
-                    NewUser.Clientes.IdCliente = Clientlist.Count();
+                    NewUser.Empleados.IdEmpleado = EmployeesList.Count();
                 }
                 else
                 {
-                    NewUser.Clientes.IdCliente = 1;
+                    NewUser.Empleados.IdEmpleado = 1;
                 }
 
-                var save = _context.Clientes.Add(NewUser.Clientes);
+                var save = _context.Empleados.Add(NewUser.Empleados);
                 if (save != null)
                 {
-                    Clientlist.Add(NewUser.Clientes);
-                    _httpContextAccessor.HttpContext.Session.Set<List<Cliente>>(ConstactSession.ClientList, Clientlist);
+                    NewUser.Empleados = new Empleado();
+                    EmployeesList.Add(NewUser.Empleados);
+                    _httpContextAccessor.HttpContext.Session.Set<List<Empleado>>(ConstactSession.EmployeesList, EmployeesList);
 
                     if (NewUser.changeUser)
                     {
-                        if(NewUser.Usuario.Contraseña== NewUser.Usuario.Contraseña)
+                        if (NewUser.Usuario.ConfirmPassword == NewUser.Usuario.Contraseña)
                         {
                             var Userlist = _httpContextAccessor.HttpContext.Session.Get<List<UsuarioTable>>(ConstactSession.UserList);
                             if (Userlist != null)
@@ -83,24 +113,23 @@ namespace SysDVW.Pages.Clients
                                 if (saved != null)
                                 {
                                     _context.SaveChanges();
-                                    NewUser.Usuario = new UsuarioTable();
                                 }
                             }
                         }
                         else
                         {
                             ModelState.AddModelError("CustomError", "Las contraseñas no coinciden, favor volver a intentar");
-                            return RedirectToPage("/Clients/clients-list");
+                            return RedirectToPage("/Employees/Employees-list");
                         }
                     }
 
                     _context.SaveChanges();
-                    NewUser.Clientes = new Cliente();
+                    NewUser.Empleados = new Empleado();
                     _httpContextAccessor.HttpContext.Session.Set<User>(ConstactSession.User, NewUser);
-                    return RedirectToPage("/Clients/clients-list");
+                    return RedirectToPage("/Employees/Employees-list");
                 }
             }
-            return RedirectToPage("/Clients/clients-list");
+            return RedirectToPage("/Employees/Employees-list");
         }
     }
 }

@@ -1,5 +1,5 @@
 ﻿@page
-@model SysDVW.Pages.Clients.EditClientsModel
+@model SysDVW.Pages.Employees.EditEmployeesModel
 @{
 }
 <div class="content-wrapper">
@@ -8,45 +8,59 @@
             <span class="text-danger text-center">@Html.ValidationMessage("CustomError")</span>
             <div class="row mb-0">
                 <div class="offset-4 col-4">
-                    <h2 class="mt-0 text-center">Editar Cliente</h2>
+                    <h2 class="mt-0 text-center">Editar Empleado</h2>
                 </div>
                 <div class="col-4 form-group text-right mt-3">
-                    <a asp-page="/Clients/clients-list" class="puntero btn btn-primary btn-sm"> <i class="fas fa-backward"></i> Atras</a>
+                    <a asp-page="/Employees/Employees-list" class="puntero btn btn-primary btn-sm"> <i class="fas fa-backward"></i> Atras</a>
                 </div>
             </div>
 
             <div class="row">
-                <!--Clients area-->
-                <form method="post" asp-page-handler="EditClient" id="cliente">
+                <!--Employee area-->
+                <form method="post" asp-page-handler="EditEmployees" id="empleado">
                     <div class="row" style="font-size:10px;">
-                        <input type="hidden" asp-for="@Model.NewUser.Clientes.IdCliente">
-                        <input type="hidden" asp-for="@Model.NewUser.Usuario.Usuario">
+                        <input type="hidden" asp-for="@Model.NewUser.Empleados.IdEmpleado">
+                        <input type="hidden" asp-for="@Model.NewUser.Usuario.IdUsuario">
+                        <input type="hidden" asp-for="@Model.NewUser.Empleados.IdCargo" id="idcargo">
+                        <div class="col-3 form-group">
+                            <div class="col-12">
+                                <label for="Selectcategorytype">Tipo de Empleado</label>
+                            </div>
+                            <div class="col-12 form-group">
+                                <select class="form-control form-control-sm" id="Selecttype" onchange="NewSelectType()" data-live-search="true">
+                                    <option value="">Seleccione un Tipo de Empleado</option>
+                                    @foreach (var item in Model.listposition)
+                                    {
+                                        <option value="@item.IdCargo">@item.Descripcion</option>
+                                    }
+                                </select>
+                            </div>
+                            <div class="col-12 form-group">
+                                <input type="text" readonly="readonly" asp-for="@Model.NewUser.Empleados.Cargo" value="@Model.NewUser.Empleados.Cargo" class="form-control form-control-sm" placeholder="Cargo" id="cargo">
+                            </div>
+                        </div>
+                        <div class="col-9 form-group">
+                            <label for="Direccion">Direccion</label>
+                            <textarea type="text" id="Direccion" asp-for="@Model.NewUser.Empleados.Direccion" value="@Model.NewUser.Empleados.Direccion" class="form-control form-control-sm" placeholder="Direccion" rows="3"></textarea>
+                        </div>
                         <div class="col-3 form-group">
                             <label for="Nombres">Nombres</label>
-                            <input type="text" id="Nombres" asp-for="@Model.NewUser.Clientes.Nombres" value="@Model.NewUser.Clientes.Nombres" class="form-control form-control-sm" placeholder="Nombres">
+                            <input type="text" id="Nombres" asp-for="@Model.NewUser.Empleados.Nombres" value="@Model.NewUser.Empleados.Nombres" class="form-control form-control-sm" placeholder="Nombres">
                         </div>
                         <div class="col-3 form-group">
                             <label for="Apellidos">Apellidos</label>
-                            <input type="text" id="Apellidos" asp-for="@Model.NewUser.Clientes.Apellidos" value="@Model.NewUser.Clientes.Apellidos" class="form-control form-control-sm" placeholder="Apellidos">
+                            <input type="text" id="Apellidos" asp-for="@Model.NewUser.Empleados.Apellidos" value="@Model.NewUser.Empleados.Apellidos" class="form-control form-control-sm" placeholder="Apellidos">
                         </div>
                         <div class="col-3 form-group">
                             <label for="Cedula">Cedula</label>
-                            <input type="number" id="Cedula" asp-for="@Model.NewUser.Clientes.DNI" value="@Model.NewUser.Clientes.DNI" class="form-control form-control-sm" placeholder="Cedula">
-                        </div>
-                        <div class="col-3 form-group">
-                            <label for="Telefono">Telefono</label>
-                            <input type="text" id="Telefono" asp-for="@Model.NewUser.Clientes.Telefono" value="@Model.NewUser.Clientes.Telefono" class="form-control form-control-sm" placeholder="Telefono">
+                            <input type="text" readonly="readonly" id="Cedula" asp-for="@Model.NewUser.Empleados.Dni" value="@Model.NewUser.Empleados.Dni" class="form-control form-control-sm" placeholder="Cedula">
                         </div>
                         <div class="col-3 form-group">
                             <label for="Correo">Correo</label>
                             <input type="number" id="Correo" asp-for="@Model.NewUser.Empleados.Correo" value="@Model.NewUser.Empleados.Correo" class="form-control form-control-sm" placeholder="Correo Electronico">
                         </div>
-                        <div class="col-6 form-group">
-                            <label for="Direccion">Direccion</label>
-                            <textarea type="text" id="Direccion" asp-for="@Model.NewUser.Clientes.Direccion" value="@Model.NewUser.Clientes.Direccion" class="form-control form-control-sm" placeholder="Direccion" rows="3"></textarea>
-                        </div>
                     </div>
-                    @*-Client User area-*@
+                    @*-Employee User area-*@
                     <div class="icheck-primary">
                         <input type="checkbox" id="usercheck" onclick="ocultar()" asp-for="@Model.NewUser.changeUser">
                         <label for="usercheck">
@@ -54,7 +68,7 @@
                         </label>
                     </div>
                     <fieldset class="border border-dark col-9" id="User" hidden="hidden">
-                        <legend style="font-size:13px; font-weight:bold;">Editar Usuario del Cliente</legend>
+                        <legend style="font-size:13px; font-weight:bold;">Editar Usuario del Empleado</legend>
                         <div class="col-6 form-group">
                             <label for="Usuario">Usuario</label><br />
                             @Model.NewUser.Usuario.Usuario
@@ -80,7 +94,14 @@
         </div>
     </div>
 </div>
+
 <script>
+    function NewSelectType() {
+        var x = document.getElementById("Selecttype").value;
+        if (x != null) {
+            window.location.href = "EditEmployees?id=" + x + "&handler=Selecttype";
+        }
+    }
     function ocultar() {
         var usercheck = document.getElementById("usercheck");
         var User = document.getElementById("User");

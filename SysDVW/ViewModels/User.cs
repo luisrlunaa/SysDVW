@@ -15,10 +15,10 @@ namespace SysDVW.ViewModels
 
         #region Propeties
 
-
+        public Cliente Clientes { get; set; }
         public Empleado Empleados { get; set; }
-
         public UsuarioTable Usuario { get; set; }
+        public bool changeUser { get; set; }
         //public virtual ICollection<UserRole> Roles { get; } = new List<UserRole>();
 
 
@@ -35,6 +35,9 @@ namespace SysDVW.ViewModels
         public User()
         {
             Id = IdentityGenerator.NewSequentialGuid().ToString();
+            Clientes = new Cliente();
+            Empleados = new Empleado();
+            Usuario = new UsuarioTable();
         }
 
 

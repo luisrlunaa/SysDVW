@@ -8,6 +8,8 @@ namespace SysDVW.Models.Entities
         [Key]
         public int IdUsuario { get; set; }
         public int IdEmpleado { get; set; }
+        [NotMapped]
+        public int IdCliente { get; set; }
         [Required]
         public string Usuario { get; set; }
         public string Contraseña { get; set; }

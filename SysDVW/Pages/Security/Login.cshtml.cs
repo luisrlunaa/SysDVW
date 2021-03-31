@@ -24,7 +24,7 @@ namespace SysDVW.Pages.Security
         }
         public void OnGet(string ReturnUrl)
         {
-           // ViewData.Add(nameof(ReturnUrl), string.IsNullOrWhiteSpace(ReturnUrl) ? Url.Page("/Home/Index") : ReturnUrl);
+           ViewData.Add(nameof(ReturnUrl), string.IsNullOrWhiteSpace(ReturnUrl) ? Url.Page("/Home/Index") : ReturnUrl);
         }
         public IActionResult OnPostInicio(LoginViewModel login, string ReturnUrl)
         {
@@ -42,6 +42,13 @@ namespace SysDVW.Pages.Security
                     {
                         Global.UserName = Empleado.Nombres + " " + Empleado.Apellidos;
                         _httpContextAccessor.HttpContext.Session.Set<Empleado>(ConstactSession.Employee, Empleado);
+                    }
+
+                    var Cliente = _context.Clientes.FirstOrDefault(x => x.IdCliente == userloging.IdCliente);
+                    if (Cliente != null)
+                    {
+                        Global.UserName = Cliente.Nombres + " " + Cliente.Apellidos;
+                        _httpContextAccessor.HttpContext.Session.Set<Cliente>(ConstactSession.Clients, Cliente);
                     }
 
                     var empresa = _context.NomEmps.FirstOrDefault(x => x.idEmp == Empleado.IdEmpresa);

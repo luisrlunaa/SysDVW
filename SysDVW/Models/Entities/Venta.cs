@@ -22,8 +22,6 @@ namespace SysDVW.Models.Entities
         public string TipoFactura { get; set; }
         public string NombreCliente { get; set; }
         public bool borrado { get; set; } = false;
-        [NotMapped]
-        public List<DetalleVenta> DetailSalesList { get; set; }
         public Venta()
         {
         }

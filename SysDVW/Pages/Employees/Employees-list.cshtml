@@ -1,5 +1,5 @@
 ﻿@page
-@model SysDVW.Pages.Clients.clients_listtModel
+@model SysDVW.Pages.Employees.Employees_listModel
 @{
 }
 
@@ -8,10 +8,10 @@
         <span class="text-danger text-center">@Html.ValidationMessage("CustomError")</span>
         <div class="card-header row">
             <div class="col-8">
-                <h3 class="card-title">Listado de Cientes</h3>
+                <h3 class="card-title">Listado de Empleados</h3>
             </div>
             <div class="col-4 text-right">
-                <a asp-page="/Clients/NewClients" class="puntero btn btn-primary btn-sm text-right"> <i class="fas fa-plus-circle"></i> Nuevo Cliente</a>
+                <a asp-page="/Employees/NewEmployees" class="puntero btn btn-primary btn-sm text-right"> <i class="fas fa-plus-circle"></i> Nuevo Empleado</a>
             </div>
         </div>
         <div class="card-body">
@@ -21,23 +21,23 @@
                         <th>Cedula</th>
                         <th>Nombre</th>
                         <th>Apellido</th>
-                        <th>Telefono</th>
+                        <th>Cargo</th>
                         <th>Direccion</th>
                         <th>Accion</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var item3 in Model.listClients)
+                    @foreach (var item3 in Model.listEmployees)
                     {
                         <tr>
-                            <td>@item3.DNI</td>
+                            <td>@item3.Dni</td>
                             <td>@item3.Nombres</td>
                             <td>@item3.Apellidos</td>
-                            <td>@item3.Telefono</td>
+                            <td>@item3.Cargo</td>
                             <td>@item3.Direccion</td>
                             <td>
-                                <a onclick="Edit(@item3.IdCliente)" class="text-success puntero"> <i class="fas fa-edit"></i></a> /
-                                <a onclick="alerta(@item3.IdCliente)" alt="Eliminar" class="text-danger puntero"> <i class="fas fa-trash-alt"></i></a>
+                                <a onclick="Edit(@item3.IdEmpleado)" class="text-success puntero"> <i class="fas fa-edit"></i></a> /
+                                <a onclick="alerta(@item3.IdEmpleado)" alt="Eliminar" class="text-danger puntero"> <i class="fas fa-trash-alt"></i></a>
                             </td>
                         </tr>
                     }
@@ -52,13 +52,13 @@
         function alerta(id) {
             var opcion = confirm("Esta seguro Desea Eliminar?");
             if (opcion == true) {
-                window.location.href = "clients-list?ID=" + id + "&handler=Deleteclients";
+                window.location.href = "Employees-list?ID=" + id + "&handler=DeleteEmployees";
             } else { }
         }
     </script>
     <script>
         function Edit(id) {
-                window.location.href = "/Clients/Editclients?ID=" + id;
+            window.location.href = "/Employees/EditEmployees?ID=" + id;
         }
     </script>
     <script>

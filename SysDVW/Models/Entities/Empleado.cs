@@ -24,6 +24,8 @@ namespace SysDVW.Models.Entities
         [NotMapped]
         public int IdEmpresa { get; set; }
         [NotMapped]
+        public string Cargo { get; set; }
+        [NotMapped]
         public string token { get; set; }
         public Empleado()
         {
