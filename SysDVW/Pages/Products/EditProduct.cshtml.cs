@@ -13,11 +13,14 @@ namespace SysDVW.Pages.Products
     public class EditProductModel : PageModel
     {
         public ProductViewModel ProductView { get; set; }
+        public Categoria Category { get; set; }
         public Producto Product { get; set; }
         private readonly InvSysContext _context;
         private readonly IHttpContextAccessor _httpContextAccessor;
         public EditProductModel(InvSysContext context, IHttpContextAccessor httpContextAccessor)
         {
+            ProductView = new ProductViewModel();
+            Category = new Categoria();
             Product = new Producto();
             _context = context;
             _httpContextAccessor = httpContextAccessor;
@@ -60,6 +63,61 @@ namespace SysDVW.Pages.Products
             return OnGet(Product.IdProducto);
         }
 
+        //agregar categoria
+        public IActionResult OnPostAddCategory(Categoria Category)
+        {
+            ProductView = _httpContextAccessor.HttpContext.Session.Get<ProductViewModel>(ConstactSession.ProductList);
+            Category.IdCategoria = ProductView.categoryList.Count() + 1;
+
+            if (Category.Descripcion != null && Category.IdCategoria >= 1)
+            {
+                var repeat = false;
+                foreach (var category in ProductView.categoryList)
+                {
+                    if (category.Descripcion.ToUpper() == Category.Descripcion.ToUpper())
+                    {
+                        repeat = true;
+                    }
+                }
+
+                if (repeat == false)
+                {
+                    Category.Descripcion = Category.Descripcion.ToUpper();
+                    var save = _context.categorias.Add(Category);
+                    if (save != null)
+                    {
+                        ProductView.categoryList.Add(Category);
+                        _httpContextAccessor.HttpContext.Session.Set<ProductViewModel>(ConstactSession.ProductList, ProductView);
+                        _context.SaveChanges();
+                    }
+                }
+                else
+                {
+                    ModelState.AddModelError("CustomError", "La Categoria ya Exite");
+                }
+            }
+
+            return OnGet(Product.IdProducto);
+        }
+
+        //Eliminar categoria
+        public IActionResult OnGetDeleteCategory(int id)
+        {
+            ProductView = _httpContextAccessor.HttpContext.Session.Get<ProductViewModel>(ConstactSession.ProductList);
+            if (id >= 1)
+            {
+                var category = ProductView.categoryList.FirstOrDefault(x => x.IdCategoria == id);
+                var save = _context.categorias.Remove(category);
+                if (save != null)
+                {
+                    ProductView.categoryList.Remove(category);
+                    _httpContextAccessor.HttpContext.Session.Set<ProductViewModel>(ConstactSession.ProductList, ProductView);
+                    _context.SaveChanges();
+                }
+            }
+
+            return OnGet(Product.IdProducto);
+        }
         //seleccionar tipo de producto
         public IActionResult OnGetSelecttype(string id)
         {
